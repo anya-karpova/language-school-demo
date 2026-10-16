@@ -45,6 +45,35 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
 
 .course-grid[hidden]{display:none}
 
+
+/* Mobile hero correction, 2026-10-16: avoid overlapped caption / card and restore vertical rhythm. */
+@media (max-width: 570px) {
+  .hero-grid { gap: 27px; padding-bottom: 0; }
+  .hero-art { height: 380px; }
+  .feature-board {
+    width: min(82%, 335px);
+    min-height: 0;
+    transform: rotate(-3deg);
+  }
+  .board-heading { padding: 17px 18px; }
+  .board-main { padding: 19px 18px 16px; }
+  .board-name { font-size: clamp(36px, 10vw, 44px); }
+  .board-sun { font-size: 38px; right: 4px; top: 0; }
+  .board-bottom { padding: 15px 18px; }
+  .sticker-hello { top: 22px; left: 8px; }
+  .sticker-hola { right: 8px; bottom: 43px; }
+  .hero-caption { display: none; }
+  /* The .container padding shorthand used to erase the hero footer's vertical padding. */
+  .hero-foot { padding-top: 23px; padding-bottom: 26px; }
+  .section-heading h2, .how h2, .faq h2 { font-size: clamp(38px, 11vw, 49px); }
+}
+@media (max-width: 350px) {
+  .hero-art { height: 380px; }
+  .feature-board { width: 86%; }
+  .board-name { font-size: 36px; }
+  .board-sun { font-size: 33px; }
+  .sticker-hola { bottom: 34px; }
+}
 </style>
   
   
@@ -96,7 +125,7 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
           <p class="hero-lead">Английский и другие языки в маленьких группах. Выбирайте уровень, формат и время — а мы покажем подходящие варианты.</p>
           <div class="hero-actions">
             <a class="btn btn-accent btn-xl" href="#schedule">Подобрать группу <svg class="icon"><use href="#i-arrow"/></svg></a>
-            <a class="text-link" href="#approach">Как всё устроено <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#approach">Как всё устроено <span aria-hidden="true">↗︎</span></a>
           </div>
           <div class="hero-highlights" aria-label="Особенности обучения">
             <div><span class="small-icon mint"><svg class="icon"><use href="#i-check"/></svg></span><span>Программы по уровням</span></div>
@@ -105,14 +134,14 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
         </div>
         <div class="hero-art" aria-label="Иллюстрация подбора группы">
           <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
-          <div class="floating-sticker sticker-hello">Hello! <span>✳</span></div>
-          <div class="floating-sticker sticker-hola">Hola <span>↗</span></div>
+          <div class="floating-sticker sticker-hello">Hello! <span aria-hidden="true">✻</span></div>
+          <div class="floating-sticker sticker-hola">Hola <span aria-hidden="true">↗︎</span></div>
           <div class="feature-board">
             <div class="board-heading"><span class="board-kicker">ВАША СЛЕДУЮЩАЯ ГРУППА</span><span class="board-marks"><i></i><i></i><i></i></span></div>
-            <div class="board-main"><div class="board-label">Английский · B1</div><div class="board-name">Speaking<br>Club<span class="board-sun">✳</span></div><div class="board-sub">Для тех, кто хочет больше говорить</div></div>
+            <div class="board-main"><div class="board-label">Английский · B1</div><div class="board-name">Speaking<br>Club<span class="board-sun" aria-hidden="true">✻</span></div><div class="board-sub">Для тех, кто хочет больше говорить</div></div>
             <div class="board-bottom"><div><span class="meta-top">ВРЕМЯ</span><strong>Сб · 12:00</strong></div><span class="board-arrow"><svg class="icon"><use href="#i-arrow"/></svg></span></div>
           </div>
-          <div class="hero-caption">Подбор без бесконечных звонков <span>↗</span></div>
+          <div class="hero-caption">Подбор без бесконечных звонков <span>↗︎</span></div>
         </div>
       </div>
       <div class="hero-foot container"><span>УЧИТЬСЯ УДОБНЕЕ, КОГДА ЕСТЬ ВЫБОР</span><div class="hero-foot-line"></div><span>01 / 03</span></div>
@@ -122,8 +151,8 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
       <div class="container">
         <div class="section-heading split-heading"><div><p class="section-kicker">01 / ПРОГРАММЫ</p><h2 id="programsTitle">Для каждого —<br><span class="serif-italic">свой маршрут</span></h2></div><p class="section-aside">Не нужно искать подходящие занятия среди десятков страниц. Начните с того, для кого нужен курс.</p></div>
         <div class="segment-grid">
-          <button type="button" class="segment-card segment-mint" data-segment="adult"><span class="segment-number">01 / ВЗРОСЛЫМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">A2</span><span class="segment-star">✳</span></span><strong>Новый язык.<br>Новые планы.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
-          <button type="button" class="segment-card segment-lavender" data-segment="teen"><span class="segment-number">02 / ПОДРОСТКАМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">B1</span><span class="segment-star">↗</span></span><strong>Больше уверенности<br>на каждом уроке.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
+          <button type="button" class="segment-card segment-mint" data-segment="adult"><span class="segment-number">01 / ВЗРОСЛЫМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">A2</span><span class="segment-star">✻</span></span><strong>Новый язык.<br>Новые планы.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
+          <button type="button" class="segment-card segment-lavender" data-segment="teen"><span class="segment-number">02 / ПОДРОСТКАМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">B1</span><span class="segment-star">↗︎</span></span><strong>Больше уверенности<br>на каждом уроке.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
           <button type="button" class="segment-card segment-peach" data-segment="child"><span class="segment-number">03 / ДЕТЯМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">ABC</span><span class="segment-star">✺</span></span><strong>Знакомство с языком<br>через интерес.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
         </div>
       </div>
@@ -136,7 +165,7 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
           <p class="schedule-aside">Найдите удобные занятия за несколько секунд. Даты, места и стоимость в этой демоверсии — примеры.</p>
         </div>
         <div class="filter-panel" aria-label="Поиск подходящей группы">
-          <div class="filter-panel-head"><span><svg class="icon"><use href="#i-sliders"/></svg> Подобрать занятия</span><button class="reset-btn" id="resetFilters" type="button">Сбросить фильтры ↗</button></div>
+          <div class="filter-panel-head"><span><svg class="icon"><use href="#i-sliders"/></svg> Подобрать занятия</span><button class="reset-btn" id="resetFilters" type="button">Сбросить фильтры ↗︎</button></div>
           <div class="filters-grid">
             <label class="filter"><span>Язык</span><select id="filterLanguage"><option value="all">Любой</option><option value="en">Английский</option><option value="de">Немецкий</option><option value="es">Испанский</option></select></label>
             <label class="filter"><span>Для кого</span><select id="filterSegment"><option value="all">Для всех</option><option value="adult">Взрослым</option><option value="teen">Подросткам</option><option value="child">Детям</option></select></label>
@@ -153,12 +182,12 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
     </section>
 
     <section class="how section" id="approach" aria-labelledby="howTitle">
-      <div class="container how-layout"><div><p class="section-kicker">03 / КАК НАЧАТЬ</p><h2 id="howTitle">От поиска<br>до первого <span class="serif-italic">урока.</span></h2><p class="how-lead">Три простых шага вместо долгой переписки.</p><div class="how-deco" aria-hidden="true">↗<span>hello</span></div></div><div class="step-list"><div class="step"><span class="step-index">01</span><div><h3>Выберите группу</h3><p>Фильтруйте по возрасту, уровню, формату и времени занятий.</p></div><span class="step-arrow">↗</span></div><div class="step"><span class="step-index">02</span><div><h3>Посмотрите детали</h3><p>Узнайте дни, стоимость, дату старта и наличие мест в одном месте.</p></div><span class="step-arrow">↗</span></div><div class="step"><span class="step-index">03</span><div><h3>Оставьте заявку</h3><p>В демоверсии вы увидите предпросмотр заявки. В реальном проекте она попадёт администратору.</p></div><span class="step-arrow">↗</span></div></div></div>
+      <div class="container how-layout"><div><p class="section-kicker">03 / КАК НАЧАТЬ</p><h2 id="howTitle">От поиска<br>до первого <span class="serif-italic">урока.</span></h2><p class="how-lead">Три простых шага вместо долгой переписки.</p><div class="how-deco" aria-hidden="true">↗︎<span>hello</span></div></div><div class="step-list"><div class="step"><span class="step-index">01</span><div><h3>Выберите группу</h3><p>Фильтруйте по возрасту, уровню, формату и времени занятий.</p></div><span class="step-arrow">↗︎</span></div><div class="step"><span class="step-index">02</span><div><h3>Посмотрите детали</h3><p>Узнайте дни, стоимость, дату старта и наличие мест в одном месте.</p></div><span class="step-arrow">↗︎</span></div><div class="step"><span class="step-index">03</span><div><h3>Оставьте заявку</h3><p>В демоверсии вы увидите предпросмотр заявки. В реальном проекте она попадёт администратору.</p></div><span class="step-arrow">↗︎</span></div></div></div>
     </section>
 
     <section class="faq section" id="faq" aria-labelledby="faqTitle"><div class="container faq-layout"><div><p class="section-kicker">ЧАСТЫЕ ВОПРОСЫ</p><h2 id="faqTitle">Немного<br><span class="serif-italic">ясности.</span></h2><p class="faq-note">Ответы ниже относятся к демонстрационной модели сайта, а не к услугам действующей школы.</p></div><div class="faq-items"><details><summary>Можно ли выбрать только вечерние группы? <span class="faq-plus">+</span></summary><p>Да. В расписании есть фильтр по времени: утро, день, вечер и выходные.</p></details><details><summary>Уровень A0 — это обучение с нуля? <span class="faq-plus">+</span></summary><p>Да. Уровень A0 используется здесь для обозначения групп для начинающих без подготовки.</p></details><details><summary>Что происходит после отправки заявки? <span class="faq-plus">+</span></summary><p>Сейчас это демонстрация интерфейса: данные никому не передаются. В коммерческой версии заявку можно отправлять администратору по защищённому каналу.</p></details><details><summary>Можно ли открыть расписание на телефоне? <span class="faq-plus">+</span></summary><p>Да. Интерфейс адаптирован под смартфоны, планшеты и большие экраны.</p></details></div></div></section>
 
-    <section class="end-cta"><div class="container end-cta-inner"><div><span class="end-label">ГОТОВЫ ПОСМОТРЕТЬ ВАРИАНТЫ?</span><h2>Начинается<br>с одного <em>шага.</em></h2></div><a href="#schedule" class="btn btn-white btn-xl">Найти свою группу <svg class="icon"><use href="#i-arrow"/></svg></a><span class="end-pattern" aria-hidden="true">✳</span></div></section>
+    <section class="end-cta"><div class="container end-cta-inner"><div><span class="end-label">ГОТОВЫ ПОСМОТРЕТЬ ВАРИАНТЫ?</span><h2>Начинается<br>с одного <em>шага.</em></h2></div><a href="#schedule" class="btn btn-white btn-xl">Найти свою группу <svg class="icon"><use href="#i-arrow"/></svg></a><span class="end-pattern" aria-hidden="true">✻</span></div></section>
   </main>
 
   <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><strong>линия<span>.</span></strong><small>Демонстрационная языковая студия</small></div><p>Концепт интерфейса для портфолио. Школа вымышленная, все группы и цены — примеры. Персональные данные не отправляются и не сохраняются.</p><a href="#top">Наверх ↑</a></div></footer>
