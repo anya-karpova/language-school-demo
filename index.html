@@ -74,6 +74,34 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
   .board-sun { font-size: 33px; }
   .sticker-hola { bottom: 34px; }
 }
+
+/*
+ * Desktop hero: as the viewport gets wider, the two main blocks drift
+ * outwards AND vertically, creating a restrained diagonal composition.
+ * The offset is tied to viewport width and capped on ultrawide screens.
+ * Tablets and phones keep their existing layout (no translation).
+ */
+@media (min-width: 781px) {
+  :root {
+    --hero-diag-x: clamp(0px, calc(6vw - 61.44px), 50px);
+    --hero-diag-y: clamp(0px, calc(3.2vw - 32.77px), 28px);
+  }
+  .hero-grid {
+    padding-top: clamp(65px, 5.5vw, 100px);
+    padding-bottom: clamp(55px, 4.5vw, 85px);
+  }
+  .hero-copy {
+    transform: translate3d(calc(0px - var(--hero-diag-x)), calc(0px - var(--hero-diag-y)), 0);
+    transition: transform 220ms ease-out;
+  }
+  .hero-art {
+    transform: translate3d(var(--hero-diag-x), var(--hero-diag-y), 0);
+    transition: transform 220ms ease-out;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy, .hero-art { transition: none; }
+}
 </style>
   
   
