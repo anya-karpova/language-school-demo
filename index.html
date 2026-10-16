@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172b30">
+  <meta name="description" content="Демонстрационный сайт языковой студии: фильтры групп, расписание и интерактивная заявка.">
+  <title>Линия — языковая студия · демо</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2217%22%20fill%3D%22%23172b30%22/%3E%3Cpath%20d%3D%22M15%2043V20m0%2023h23%22%20fill%3D%22none%22%20stroke%3D%22%23e7fc8c%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2220%22%20r%3D%225%22%20fill%3D%22%23f8ae93%22/%3E%3C/svg%3E%0A">
+  <style>
+:root{--ink:#182c31;--ink-2:#274046;--paper:#f8f8f4;--white:#fff;--soft:#edf0e8;--muted:#667478;--acid:#dded8b;--mint:#d7efdf;--lilac:#e5e0f5;--peach:#f6d4c3;--sky:#dbeaf4;--line:rgba(24,44,49,.14);--radius:24px;--shadow:0 16px 50px rgba(8,24,26,.09);--container:1184px}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:108px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body.dialog-open{overflow:hidden}
+button,input,select{font:inherit}
+button{cursor:pointer}a{color:inherit;text-decoration:none}
+svg.icon{height:20px;width:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.container{max-width:var(--container);margin:0 auto;padding:0 28px}
+:focus-visible{outline:3px solid #f0a26f;outline-offset:4px}
+.demo-banner{min-height:38px;display:flex;align-items:center;justify-content:center;gap:12px;background:#0e2127;color:#d5e1de;text-align:center;padding:8px 16px;font-size:12px;line-height:1.4;letter-spacing:.01em}
+.demo-pill{font-size:10px;font-weight:850;letter-spacing:.14em;background:#dded8b;color:#182c31;padding:4px 8px;border-radius:5px}
+.site-header{position:sticky;top:0;z-index:40;background:rgba(248,248,244,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(24,44,49,.09)}
+.header-inner{height:88px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.brand{display:inline-flex;align-items:center;gap:12px;min-width:175px}
+.brand-mark{position:relative;background:var(--ink);width:43px;height:43px;border-radius:15px;display:inline-flex;align-items:center;justify-content:center;transform:rotate(-8deg)}
+.brand-mark span:first-child{border-left:5px solid var(--acid);border-bottom:5px solid var(--acid);width:20px;height:22px;border-radius:0 0 0 3px;transform:translate(3px,-1px)}
+.brand-mark span:last-child{position:absolute;width:7px;height:7px;border-radius:50%;background:#f3ae91;top:11px;right:9px}
+.brand-text{display:flex;flex-direction:column;line-height:1;gap:5px}.brand-text strong{font-size:25px;letter-spacing:-1.4px;font-weight:850}.brand-dot{color:#f49c79}.brand-text small{font-size:10px;letter-spacing:.11em;font-weight:650;text-transform:uppercase;color:#607073}
+.main-nav{display:flex;align-items:center;gap:30px}.main-nav a{font-size:13px;font-weight:650;transition:color .2s}.main-nav a:hover{color:#617d39}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:17px;border:0;border-radius:14px;padding:15px 19px;font-size:13px;line-height:1.2;font-weight:750;text-align:center;transition:transform .2s,background .2s,box-shadow .2s;white-space:nowrap}.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(0)}.btn-dark{background:var(--ink);color:#fff}.btn-dark:hover{background:#304c53}.btn-accent{color:var(--ink);background:var(--acid)}.btn-accent:hover{background:#d0e781;box-shadow:0 8px 24px rgba(173,193,95,.25)}.btn-white{background:#fff;color:var(--ink)}.btn-xl{padding:19px 25px;font-size:14px;min-height:58px}.btn-wide{width:100%;min-height:54px}.menu-toggle{display:none;background:transparent;border:0;padding:12px;width:44px;height:44px;flex-direction:column;align-items:center;justify-content:center;gap:5px}.menu-toggle span{display:block;height:2px;width:22px;background:var(--ink);border-radius:2px}
+.hero{background:#f8f8f4;overflow:hidden;position:relative}.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:40px;padding-top:65px;padding-bottom:55px;min-height:625px}.hero-copy{padding-bottom:15px}.eyebrow{display:inline-flex;align-items:center;gap:14px;color:#63706b;font-size:11px;font-weight:800;letter-spacing:.18em}.eyebrow-line{width:26px;height:2px;background:#a0b66d}.hero h1{margin:30px 0 25px;letter-spacing:-.076em;line-height:1.02;font-size:clamp(57px,5.65vw,91px);font-weight:760}.hero h1 em,.schedule h2 em,.end-cta h2 em,.request-dialog h2 em{font-weight:400;font-family:Georgia,"Times New Roman",serif;letter-spacing:-.06em}.hero h1 em{color:#85a45d}.hero-lead{max-width:490px;color:#647375;font-size:17px;line-height:1.68;margin:0}.hero-actions{display:flex;align-items:center;gap:32px;margin-top:35px}.text-link{font-size:13px;font-weight:760;border-bottom:1px solid #a8b5af;padding-bottom:7px}.text-link span{padding-left:8px}.hero-highlights{display:flex;flex-wrap:wrap;gap:28px;margin-top:45px}.hero-highlights>div{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:680}.small-icon{height:31px;width:31px;border-radius:50%;display:grid;place-items:center}.small-icon svg{width:15px;height:15px}.small-icon.mint{background:#dcebc2}.small-icon.lilac{background:#e1ddf7}.hero-art{height:505px;border-radius:29px 130px 29px 29px;background:#dfe9df;position:relative;display:flex;align-items:center;justify-content:center;isolation:isolate;overflow:hidden}.hero-art::after{content:"";position:absolute;width:390px;height:390px;background:radial-gradient(circle,#f4eedb 0%,rgba(244,238,219,0) 66%);z-index:-1;transform:translate(50px,10px)}.hero-orbit{position:absolute;border:1px solid rgba(47,86,72,.19);border-radius:50%;z-index:-1}.orbit-one{width:550px;height:550px;top:-240px;right:-260px}.orbit-two{width:670px;height:670px;bottom:-455px;left:-250px}.floating-sticker{position:absolute;z-index:5;background:#fff;padding:14px 20px;border:1px solid rgba(30,64,60,.07);border-radius:13px;box-shadow:0 15px 28px rgba(20,45,42,.12);font-family:Georgia,serif;font-size:25px;font-style:italic;transform:rotate(-9deg)}.floating-sticker span{color:#ee9e77;font-family:sans-serif;font-size:22px}.sticker-hello{top:43px;left:18px}.sticker-hola{bottom:76px;right:12px;transform:rotate(8deg);background:#f6d0c0}.sticker-hola span{color:#183c3c}.feature-board{background:#19363a;border:1px solid rgba(255,255,255,.12);color:white;box-shadow:0 30px 40px rgba(11,33,31,.24);border-radius:22px;width:365px;min-height:322px;transform:rotate(-5deg);overflow:hidden}.board-heading{display:flex;justify-content:space-between;align-items:center;padding:22px 25px;border-bottom:1px solid rgba(255,255,255,.19)}.board-kicker{font-size:9px;letter-spacing:.18em;font-weight:700;color:#b8d7c8}.board-marks{display:flex;gap:5px}.board-marks i{height:6px;width:6px;border-radius:50%;background:#eae4c7}.board-marks i:nth-child(2){background:#a6d0bd}.board-marks i:nth-child(3){background:#f1ad91}.board-main{padding:28px 25px 22px}.board-label{font-size:12px;font-weight:650;color:#cbdacc}.board-name{font-size:52px;letter-spacing:-.055em;font-weight:700;line-height:.99;margin:13px 0;position:relative}.board-sun{position:absolute;right:14px;top:-4px;font-weight:400;color:#dded8b;font-size:48px}.board-sub{font-size:12px;color:#b3c9c6}.board-bottom{border-top:1px solid rgba(255,255,255,.2);padding:20px 25px;display:flex;justify-content:space-between;align-items:center}.board-bottom>div{display:flex;flex-direction:column;gap:6px}.meta-top{letter-spacing:.14em;font-size:9px;font-weight:800;color:#a6c0b7}.board-bottom strong{font-size:14px}.board-arrow{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:var(--acid);color:var(--ink)}.hero-caption{position:absolute;bottom:28px;left:24px;font-size:11px;font-weight:760;letter-spacing:.02em}.hero-caption span{font-size:16px;padding-left:8px}.hero-foot{display:flex;align-items:center;gap:18px;padding-bottom:24px;color:#87928b;font-size:10px;font-weight:850;letter-spacing:.13em}.hero-foot-line{height:1px;background:#d4dad1;flex:1}
+.section{padding:105px 0}.section-kicker{font-size:11px;letter-spacing:.15em;font-weight:850;color:#77937a;margin:0 0 27px}.section-heading h2,.how h2,.faq h2{font-size:clamp(43px,4.4vw,66px);letter-spacing:-.067em;line-height:1.07;margin:0;font-weight:730}.serif-italic{font-family:Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.07em;color:#7a9f6a}.split-heading{display:flex;align-items:end;justify-content:space-between;gap:60px;margin-bottom:45px}.section-aside{max-width:315px;margin:0 5px 8px 0;color:#677779;font-size:15px;line-height:1.7}.segment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.segment-card{border:0;border-radius:20px;min-height:320px;padding:29px;text-align:left;color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s,box-shadow .25s;overflow:hidden;position:relative}.segment-card:hover{transform:translateY(-5px);box-shadow:0 15px 36px rgba(30,58,53,.09)}.segment-mint{background:#dae9d7}.segment-lavender{background:#e6def1}.segment-peach{background:#f3daca}.segment-number{font-size:11px;letter-spacing:.13em;font-weight:820}.segment-card strong{font-size:26px;line-height:1.16;letter-spacing:-.045em;font-weight:730;margin-top:auto}.segment-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(24,44,49,.17);margin-top:24px;padding-top:15px;font-size:12px;font-weight:760}.segment-graphic{height:130px;position:relative;display:flex;align-items:center;justify-content:center}.segment-bubble{display:grid;place-items:center;width:123px;height:116px;border:2px solid var(--ink);border-radius:49% 51% 45% 48%;font-size:54px;font-weight:730;letter-spacing:-.09em;transform:rotate(-10deg)}.segment-star{position:absolute;right:37px;top:13px;font-size:44px;color:#699978}.segment-lavender .segment-bubble{transform:rotate(9deg);border-radius:22px}.segment-lavender .segment-star{color:#9b86c8}.segment-peach .segment-bubble{font-size:39px;transform:rotate(8deg);border-radius:50%}.segment-peach .segment-star{color:#da9770}
+.schedule{background:#172e32;color:#fff;position:relative;overflow:hidden}.schedule:before{content:"";position:absolute;inset:-250px -450px auto auto;width:700px;height:700px;border:1px solid rgba(255,255,255,.06);border-radius:50%;pointer-events:none}.schedule-top{display:flex;align-items:end;justify-content:space-between;gap:60px;margin-bottom:42px}.section-kicker.light{color:#c6da96}.schedule h2{font-size:clamp(47px,4.8vw,72px);letter-spacing:-.068em;line-height:1.03;margin:0}.schedule h2 em{color:var(--acid)}.schedule-aside{font-size:15px;line-height:1.7;color:#b6c8c6;max-width:305px;margin:0 0 7px}.filter-panel{background:#fff;border-radius:21px;padding:26px;color:var(--ink);box-shadow:0 20px 65px rgba(3,21,24,.15)}.filter-panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px}.filter-panel-head>span{font-size:15px;font-weight:850;display:flex;align-items:center;gap:10px}.filter-panel-head svg{width:17px;height:17px}.reset-btn{border:0;background:transparent;color:#537772;font-weight:750;font-size:12px;text-decoration:underline;text-underline-offset:4px}.filters-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.filter{display:flex;flex-direction:column;gap:8px;min-width:0}.filter span{font-size:11px;color:#6b7b7b;font-weight:760}.filter select{width:100%;border:1px solid #dce3df;color:var(--ink);font-size:12px;font-weight:650;background:#f7f9f6;padding:13px 28px 13px 12px;border-radius:10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='%23485e60' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-position:right 9px center;background-repeat:no-repeat}.filter select:hover{border-color:#aabcb8}.filter select:focus{border-color:#759275;outline:3px solid #dceecb}.filters-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #e6ebe6;margin-top:20px;padding-top:17px}.filters-footer>div{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:780}.result-dot{height:8px;width:8px;background:#70ad85;border-radius:50%}.sample-note{font-size:11px;color:#899795}.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}.course-card{display:flex;flex-direction:column;min-height:358px;background:#f9faf7;color:var(--ink);padding:26px;border-radius:19px;border:2px solid transparent;transition:transform .2s,border-color .2s}.course-card:hover{transform:translateY(-3px);border-color:rgba(221,237,139,.85)}.course-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.course-language{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:830;letter-spacing:.08em;text-transform:uppercase}.language-bullet{height:10px;width:10px;background:#93b68e;border-radius:50%}.language-bullet.de{background:#b399d4}.language-bullet.es{background:#e4a98c}.course-level{font-size:13px;font-weight:850;border:1px solid #cbd8d0;border-radius:8px;padding:7px 9px}.course-card h3{font-size:25px;letter-spacing:-.056em;line-height:1.12;margin:24px 0 10px;font-weight:780;max-width:270px}.course-description{font-size:12px;line-height:1.6;color:#6a7a7c;margin:0 0 17px;min-height:39px}.course-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}.course-tag{padding:6px 9px;border-radius:6px;background:#e7efdf;font-size:10px;font-weight:750}.course-tag.format{background:#e6ebef}.course-tag.sold{background:#f5e1de}.course-details{border-top:1px solid #dce4df;padding-top:15px;display:grid;grid-template-columns:1fr 1fr;gap:11px}.course-detail{display:flex;flex-direction:column;gap:6px}.course-detail span{font-size:10px;font-weight:680;color:#7b8989}.course-detail strong{font-size:12px;font-weight:770}.course-card-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:23px}.course-price{font-size:22px;font-weight:850;letter-spacing:-.045em;line-height:1}.course-price small{font-size:10px;color:#86928c;font-weight:600;letter-spacing:0}.course-select{background:var(--ink);color:#fff;border:0;border-radius:11px;display:inline-flex;gap:10px;align-items:center;justify-content:center;padding:12px 13px;font-size:12px;font-weight:720;white-space:nowrap}.course-select:hover{background:#395e62}.course-select:disabled{opacity:.5;cursor:not-allowed}.course-select svg{width:16px;height:16px}.empty-state{padding:65px 20px;background:#f7faf5;color:var(--ink);border-radius:19px;margin-top:20px;text-align:center}.empty-state[hidden]{display:none}.empty-illustration{font-family:Georgia,serif;font-size:62px;opacity:.5}.empty-state h3{font-size:28px;margin:12px 0}.empty-state p{color:#657677;max-width:440px;margin:0 auto 25px;font-size:14px;line-height:1.7}.schedule-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:28px;color:#a2beb9}.schedule-bottom div{display:flex;gap:10px;align-items:start;font-size:12px;line-height:1.6;max-width:710px}.schedule-bottom>span{font-size:10px;font-weight:780;letter-spacing:.12em;white-space:nowrap}
+.how-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:90px}.how-lead{color:#728080;font-size:15px;margin-top:25px}.how-deco{margin-top:62px;background:#e3ebc8;height:145px;max-width:275px;border-radius:90px 90px 40px 50px;padding:24px 36px;font-size:80px;font-weight:200;line-height:1;position:relative;transform:rotate(-6deg)}.how-deco span{font-family:Georgia,serif;font-size:23px;position:absolute;right:35px;bottom:25px;font-style:italic}.step-list{border-top:1px solid #d7dfd8}.step{display:grid;grid-template-columns:50px 1fr 20px;gap:18px;padding:34px 0 32px;border-bottom:1px solid #d7dfd8}.step-index{font-size:13px;font-weight:850;color:#7c9b79}.step h3{font-size:24px;letter-spacing:-.04em;margin:0 0 11px}.step p{font-size:14px;line-height:1.7;max-width:390px;margin:0;color:#6b797a}.step-arrow{font-size:24px;color:#698d6d}
+.faq{background:#edeFE8}.faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:100px}.faq-note{max-width:280px;font-size:13px;line-height:1.7;color:#687b77;margin-top:29px}.faq-items{border-top:1px solid #cdd8cf}.faq details{border-bottom:1px solid #cdd8cf}.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:18px;cursor:pointer;padding:23px 0;font-weight:740;font-size:15px;line-height:1.4}.faq summary::-webkit-details-marker{display:none}.faq-plus{display:grid;place-items:center;flex:none;width:32px;height:32px;border:1px solid #c1cec4;border-radius:50%;font-size:24px;font-weight:400;transition:transform .2s}.faq details[open] .faq-plus{transform:rotate(45deg)}.faq details p{margin:0 45px 24px 0;color:#687975;line-height:1.7;font-size:14px}
+.end-cta{background:#ddeb8b;overflow:hidden}.end-cta-inner{padding-top:78px;padding-bottom:82px;display:flex;align-items:end;justify-content:space-between;gap:20px;position:relative}.end-label{display:block;font-size:11px;letter-spacing:.13em;font-weight:780;margin-bottom:17px}.end-cta h2{font-size:clamp(49px,5.3vw,80px);letter-spacing:-.065em;line-height:1.02;margin:0}.end-cta h2 em{color:#688a52}.end-cta .btn{z-index:2}.end-pattern{position:absolute;right:27%;top:2px;font-size:155px;opacity:.12;transform:rotate(-15deg);pointer-events:none}.footer{background:#12272c;color:#f7fbf3}.footer-inner{padding-top:42px;padding-bottom:42px;display:flex;align-items:center;justify-content:space-between;gap:38px}.footer-brand{display:flex;flex-direction:column;gap:5px;min-width:170px}.footer-brand strong{font-size:29px;letter-spacing:-.06em}.footer-brand strong span{color:#f1b69a}.footer-brand small{font-size:10px;color:#b6c8c2}.footer p{font-size:11px;color:#b5c9c2;max-width:480px;line-height:1.6;margin:0}.footer a{font-size:12px;white-space:nowrap;color:#ddeb8b;font-weight:750}
+.request-dialog{padding:0;border:none;border-radius:24px;width:min(100% - 28px,515px);max-height:min(92vh,930px);overflow-y:auto;box-shadow:0 28px 100px rgba(0,0,0,.35);background:#fff;color:var(--ink)}.request-dialog::backdrop{background:rgba(11,29,32,.7);backdrop-filter:blur(5px)}.dialog-shell{padding:39px;position:relative}.dialog-close{position:absolute;right:27px;top:26px;border:1px solid #dee5df;background:#f7f8f5;border-radius:50%;width:39px;height:39px;display:grid;place-items:center}.dialog-close svg{width:17px;height:17px}.modal-kicker{font-size:10px;letter-spacing:.15em;color:#7d9973;font-weight:850;margin:0 0 18px}.request-dialog h2{font-size:49px;letter-spacing:-.065em;line-height:1.03;margin:0 0 21px}.request-dialog h2 em{color:#759d6b}.modal-lead{font-size:13px;color:#5d7575;font-weight:680}.selected-course{background:#eaf0df;border-radius:15px;padding:18px;margin:13px 0 17px}.selected-course strong{display:block;font-size:17px;margin-bottom:7px}.selected-course span{font-size:12px;color:#5c716f}.privacy-demo{background:#f7f1e6;color:#786342;padding:12px 14px;border-radius:10px;font-size:11px;line-height:1.6;margin-bottom:18px}.request-dialog form{display:flex;flex-direction:column;gap:17px}.request-dialog form label{display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:780}.request-dialog input{height:47px;border:1px solid #d1dfd8;border-radius:10px;padding:0 13px;background:#fff;color:var(--ink);font-size:14px}.request-dialog input[aria-invalid="true"]{border-color:#b44b3c;background:#fff7f5}.field-error{min-height:0;color:#ac422c;font-size:11px;font-weight:570;line-height:1.3}.field-error:empty{display:none}.request-dialog form .btn{margin-top:2px}.optional-label{font-weight:400;color:#8c9894}.dialog-success .success-icon{height:58px;width:58px;display:grid;place-items:center;border-radius:50%;background:#dbeeb4;margin-bottom:24px}.dialog-success .success-icon svg{height:30px;width:30px}.dialog-success p:not(.modal-kicker){font-size:14px;line-height:1.7;color:#637572}.success-summary{background:#eef3e8;padding:17px;border-radius:13px;font-size:13px;line-height:1.7;margin:20px 0 24px}.dialog-success[hidden],#dialogFormScreen[hidden]{display:none}
+@media (max-width:1100px){.main-nav{gap:17px}.hero-grid{gap:24px}.feature-board{width:325px}.segment-card{padding:23px}.segment-card strong{font-size:23px}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.how-layout{gap:50px}}
+@media (max-width:780px){.container{padding-left:21px;padding-right:21px}.header-inner{height:75px}.main-nav{display:none;position:absolute;left:0;right:0;top:75px;padding:18px 24px 22px;background:#f8f8f4;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;box-shadow:var(--shadow)}.main-nav.open{display:flex}.main-nav a{padding:13px 0;font-size:14px}.menu-toggle{display:flex}.header-cta{margin-left:auto}.hero-grid{grid-template-columns:1fr;padding-top:55px;padding-bottom:30px;gap:39px}.hero h1{font-size:clamp(56px,9vw,76px)}.hero-art{max-width:620px;width:100%;height:420px;margin:0 auto}.hero-foot{padding-top:14px}.section{padding:80px 0}.segment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.segment-grid .segment-card:last-child{grid-column:1/-1;min-height:245px}.segment-grid .segment-card:last-child .segment-graphic{position:absolute;right:32px;top:38px}.segment-grid .segment-card:last-child strong{margin-top:95px}.split-heading,.schedule-top{align-items:start;gap:25px}.section-aside,.schedule-aside{max-width:235px}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.how-layout,.faq-layout{grid-template-columns:1fr;gap:45px}.how-deco{display:none}.faq-note{max-width:460px}.end-cta-inner{align-items:start;flex-direction:column}.end-cta .btn{margin-top:25px}.footer-inner{flex-wrap:wrap}}
+@media (max-width:570px){html{scroll-padding-top:78px}.demo-banner{font-size:10px;gap:7px}.demo-pill{font-size:9px}.container{padding:0 18px}.header-inner{height:69px;gap:8px}.brand{min-width:0;gap:9px}.brand-mark{width:36px;height:36px;border-radius:12px}.brand-text strong{font-size:23px}.brand-text small{font-size:8px}.header-cta{display:none}.main-nav{top:69px}.hero-grid{padding-top:50px;gap:34px}.hero h1{font-size:clamp(51px,12vw,68px);margin:25px 0 23px}.hero-lead{font-size:15px}.hero-actions{gap:20px;align-items:flex-start;flex-direction:column;margin-top:29px}.hero-actions .btn{width:100%}.hero-highlights{margin-top:29px;gap:11px}.hero-highlights>div{font-size:10px}.hero-art{height:358px;border-radius:20px 92px 20px 20px}.feature-board{width:76%;min-height:275px;transform:rotate(-4deg)}.board-heading{padding:18px}.board-main{padding:19px 19px 18px}.board-name{font-size:42px}.board-bottom{padding:17px 18px}.board-bottom strong{font-size:11px}.floating-sticker{font-size:19px;padding:10px 12px}.sticker-hello{top:25px;left:6px}.sticker-hola{bottom:60px;right:4px}.hero-caption{font-size:9px;bottom:16px}.hero-foot{font-size:8px}.hero-foot span:first-child{max-width:210px}.section{padding:70px 0}.section-heading h2,.how h2,.faq h2{font-size:49px}.split-heading,.schedule-top{flex-direction:column;gap:20px}.section-aside,.schedule-aside{max-width:100%;font-size:14px}.segment-grid{grid-template-columns:1fr;gap:12px}.segment-card,.segment-grid .segment-card:last-child{min-height:260px;grid-column:auto;padding:23px}.segment-card .segment-graphic,.segment-grid .segment-card:last-child .segment-graphic{position:absolute;right:20px;top:42px;height:111px}.segment-bubble{width:99px;height:96px;font-size:44px}.segment-star{right:12px;top:-4px}.segment-card strong,.segment-grid .segment-card:last-child strong{margin-top:auto;font-size:24px;max-width:250px}.segment-number{z-index:2}.segment-bottom{margin-top:18px}.schedule h2{font-size:50px}.filter-panel{padding:20px;border-radius:15px}.filter-panel-head{align-items:start;gap:15px}.filter-panel-head>span{font-size:13px}.reset-btn{font-size:10px}.filters-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 9px}.filter select{font-size:12px;padding:12px 24px 12px 10px}.filters-footer{align-items:start;flex-direction:column;gap:8px}.course-grid{grid-template-columns:1fr;gap:12px}.course-card{min-height:330px;padding:24px}.course-card h3{margin-top:22px}.schedule-bottom{flex-direction:column;align-items:start}.step{gap:10px;grid-template-columns:35px 1fr 17px}.step h3{font-size:20px}.step p{font-size:12px}.faq summary{font-size:14px}.end-cta-inner{padding-top:65px;padding-bottom:65px}.end-cta h2{font-size:54px}.footer-inner{padding-top:34px;padding-bottom:34px;gap:23px}.footer p{order:3;flex-basis:100%}.dialog-shell{padding:29px 21px}.request-dialog h2{font-size:43px}.dialog-close{top:19px;right:18px}.request-dialog{width:calc(100% - 20px)} }
+@media (max-width:350px){.filters-grid{grid-template-columns:1fr}.hero h1{font-size:49px}.feature-board{width:86%}.board-name{font-size:39px}.hero-highlights{flex-direction:column}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+
+.course-grid[hidden]{display:none}
+
+</style>
+  
+  
+</head>
+<body>
+  <svg aria-hidden="true" class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2L12 2Z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2" fill="#fff"/><circle cx="15" cy="17" r="2" fill="#fff"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 3V5Z"/><path d="M8 10h8m-8 4h5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5C9 3.5 5.5 3 3 4v15c3-1 6-.5 9 1 3-1.5 6-2 9-1V4c-3-1-6-.5-9 1Zm0 0v15"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-4 6-4 9s1 6 4 9M12 3c3 3 4 6 4 9s-1 6-4 9"/></symbol>
+  </svg>
+
+  <div class="demo-banner" role="note">
+    <span class="demo-pill">DEMO</span>
+    <span>Концепт для портфолио: школа, расписание и цены вымышлены. Заявки не отправляются.</span>
+  </div>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Линия — на главную">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
+        <span class="brand-text"><strong>линия<span class="brand-dot">.</span></strong><small>языковая студия</small></span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Основная навигация">
+        <a href="#programs">Программы</a>
+        <a href="#schedule">Расписание</a>
+        <a href="#approach">Как начать</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+      <a class="btn btn-dark header-cta" href="#schedule">Найти группу <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Открыть меню"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="eyebrow-line"></span> ЯЗЫК — ЭТО ВОЗМОЖНОСТЬ</span>
+          <h1 id="heroTitle">Начните говорить.<br><em>По-своему.</em></h1>
+          <p class="hero-lead">Английский и другие языки в маленьких группах. Выбирайте уровень, формат и время — а мы покажем подходящие варианты.</p>
+          <div class="hero-actions">
+            <a class="btn btn-accent btn-xl" href="#schedule">Подобрать группу <svg class="icon"><use href="#i-arrow"/></svg></a>
+            <a class="text-link" href="#approach">Как всё устроено <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-highlights" aria-label="Особенности обучения">
+            <div><span class="small-icon mint"><svg class="icon"><use href="#i-check"/></svg></span><span>Программы по уровням</span></div>
+            <div><span class="small-icon lilac"><svg class="icon"><use href="#i-check"/></svg></span><span>Онлайн и в студии</span></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Иллюстрация подбора группы">
+          <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+          <div class="floating-sticker sticker-hello">Hello! <span>✳</span></div>
+          <div class="floating-sticker sticker-hola">Hola <span>↗</span></div>
+          <div class="feature-board">
+            <div class="board-heading"><span class="board-kicker">ВАША СЛЕДУЮЩАЯ ГРУППА</span><span class="board-marks"><i></i><i></i><i></i></span></div>
+            <div class="board-main"><div class="board-label">Английский · B1</div><div class="board-name">Speaking<br>Club<span class="board-sun">✳</span></div><div class="board-sub">Для тех, кто хочет больше говорить</div></div>
+            <div class="board-bottom"><div><span class="meta-top">ВРЕМЯ</span><strong>Сб · 12:00</strong></div><span class="board-arrow"><svg class="icon"><use href="#i-arrow"/></svg></span></div>
+          </div>
+          <div class="hero-caption">Подбор без бесконечных звонков <span>↗</span></div>
+        </div>
+      </div>
+      <div class="hero-foot container"><span>УЧИТЬСЯ УДОБНЕЕ, КОГДА ЕСТЬ ВЫБОР</span><div class="hero-foot-line"></div><span>01 / 03</span></div>
+    </section>
+
+    <section class="segments section" id="programs" aria-labelledby="programsTitle">
+      <div class="container">
+        <div class="section-heading split-heading"><div><p class="section-kicker">01 / ПРОГРАММЫ</p><h2 id="programsTitle">Для каждого —<br><span class="serif-italic">свой маршрут</span></h2></div><p class="section-aside">Не нужно искать подходящие занятия среди десятков страниц. Начните с того, для кого нужен курс.</p></div>
+        <div class="segment-grid">
+          <button type="button" class="segment-card segment-mint" data-segment="adult"><span class="segment-number">01 / ВЗРОСЛЫМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">A2</span><span class="segment-star">✳</span></span><strong>Новый язык.<br>Новые планы.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
+          <button type="button" class="segment-card segment-lavender" data-segment="teen"><span class="segment-number">02 / ПОДРОСТКАМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">B1</span><span class="segment-star">↗</span></span><strong>Больше уверенности<br>на каждом уроке.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
+          <button type="button" class="segment-card segment-peach" data-segment="child"><span class="segment-number">03 / ДЕТЯМ</span><span class="segment-graphic" aria-hidden="true"><span class="segment-bubble">ABC</span><span class="segment-star">✺</span></span><strong>Знакомство с языком<br>через интерес.</strong><span class="segment-bottom">Выбрать курсы <svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="schedule section" id="schedule" aria-labelledby="scheduleTitle">
+      <div class="container">
+        <div class="schedule-top">
+          <div><p class="section-kicker light">02 / РАСПИСАНИЕ</p><h2 id="scheduleTitle">Ваша группа<br>уже где-то <em>здесь.</em></h2></div>
+          <p class="schedule-aside">Найдите удобные занятия за несколько секунд. Даты, места и стоимость в этой демоверсии — примеры.</p>
+        </div>
+        <div class="filter-panel" aria-label="Поиск подходящей группы">
+          <div class="filter-panel-head"><span><svg class="icon"><use href="#i-sliders"/></svg> Подобрать занятия</span><button class="reset-btn" id="resetFilters" type="button">Сбросить фильтры ↗</button></div>
+          <div class="filters-grid">
+            <label class="filter"><span>Язык</span><select id="filterLanguage"><option value="all">Любой</option><option value="en">Английский</option><option value="de">Немецкий</option><option value="es">Испанский</option></select></label>
+            <label class="filter"><span>Для кого</span><select id="filterSegment"><option value="all">Для всех</option><option value="adult">Взрослым</option><option value="teen">Подросткам</option><option value="child">Детям</option></select></label>
+            <label class="filter"><span>Уровень</span><select id="filterLevel"><option value="all">Любой</option><option value="A0">С нуля (A0)</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option></select></label>
+            <label class="filter"><span>Формат</span><select id="filterFormat"><option value="all">Неважно</option><option value="online">Онлайн</option><option value="studio">В студии</option></select></label>
+            <label class="filter"><span>Когда удобно</span><select id="filterTime"><option value="all">Любое время</option><option value="morning">Утром</option><option value="day">Днём</option><option value="evening">Вечером</option><option value="weekend">В выходные</option></select></label>
+          </div>
+          <div class="filters-footer"><div><span class="result-dot"></span><span id="resultCount" role="status" aria-live="polite">Подбираем группы…</span></div><span class="sample-note">* Демонстрационные данные</span></div>
+        </div>
+        <div class="course-grid" id="courseGrid" aria-live="off"></div>
+        <div class="empty-state" id="emptyState" hidden><div class="empty-illustration">∅</div><h3>Пока нет точного совпадения</h3><p>Попробуйте изменить уровень, формат или удобное время. В реальном проекте здесь можно предложить лист ожидания.</p><button type="button" class="btn btn-accent" id="emptyReset">Показать все группы <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+        <div class="schedule-bottom"><div><svg class="icon"><use href="#i-message"/></svg><span>Не нашли подходящее время? В рабочей версии здесь будет запрос на подбор другой группы.</span></div><span>ПРОТОТИП / 2026</span></div>
+      </div>
+    </section>
+
+    <section class="how section" id="approach" aria-labelledby="howTitle">
+      <div class="container how-layout"><div><p class="section-kicker">03 / КАК НАЧАТЬ</p><h2 id="howTitle">От поиска<br>до первого <span class="serif-italic">урока.</span></h2><p class="how-lead">Три простых шага вместо долгой переписки.</p><div class="how-deco" aria-hidden="true">↗<span>hello</span></div></div><div class="step-list"><div class="step"><span class="step-index">01</span><div><h3>Выберите группу</h3><p>Фильтруйте по возрасту, уровню, формату и времени занятий.</p></div><span class="step-arrow">↗</span></div><div class="step"><span class="step-index">02</span><div><h3>Посмотрите детали</h3><p>Узнайте дни, стоимость, дату старта и наличие мест в одном месте.</p></div><span class="step-arrow">↗</span></div><div class="step"><span class="step-index">03</span><div><h3>Оставьте заявку</h3><p>В демоверсии вы увидите предпросмотр заявки. В реальном проекте она попадёт администратору.</p></div><span class="step-arrow">↗</span></div></div></div>
+    </section>
+
+    <section class="faq section" id="faq" aria-labelledby="faqTitle"><div class="container faq-layout"><div><p class="section-kicker">ЧАСТЫЕ ВОПРОСЫ</p><h2 id="faqTitle">Немного<br><span class="serif-italic">ясности.</span></h2><p class="faq-note">Ответы ниже относятся к демонстрационной модели сайта, а не к услугам действующей школы.</p></div><div class="faq-items"><details><summary>Можно ли выбрать только вечерние группы? <span class="faq-plus">+</span></summary><p>Да. В расписании есть фильтр по времени: утро, день, вечер и выходные.</p></details><details><summary>Уровень A0 — это обучение с нуля? <span class="faq-plus">+</span></summary><p>Да. Уровень A0 используется здесь для обозначения групп для начинающих без подготовки.</p></details><details><summary>Что происходит после отправки заявки? <span class="faq-plus">+</span></summary><p>Сейчас это демонстрация интерфейса: данные никому не передаются. В коммерческой версии заявку можно отправлять администратору по защищённому каналу.</p></details><details><summary>Можно ли открыть расписание на телефоне? <span class="faq-plus">+</span></summary><p>Да. Интерфейс адаптирован под смартфоны, планшеты и большие экраны.</p></details></div></div></section>
+
+    <section class="end-cta"><div class="container end-cta-inner"><div><span class="end-label">ГОТОВЫ ПОСМОТРЕТЬ ВАРИАНТЫ?</span><h2>Начинается<br>с одного <em>шага.</em></h2></div><a href="#schedule" class="btn btn-white btn-xl">Найти свою группу <svg class="icon"><use href="#i-arrow"/></svg></a><span class="end-pattern" aria-hidden="true">✳</span></div></section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><strong>линия<span>.</span></strong><small>Демонстрационная языковая студия</small></div><p>Концепт интерфейса для портфолио. Школа вымышленная, все группы и цены — примеры. Персональные данные не отправляются и не сохраняются.</p><a href="#top">Наверх ↑</a></div></footer>
+
+  <dialog id="requestDialog" class="request-dialog" aria-labelledby="dialogTitle"><div class="dialog-shell"><button type="button" class="dialog-close" id="closeDialog" aria-label="Закрыть окно"><svg class="icon"><use href="#i-close"/></svg></button><div id="dialogFormScreen"><p class="modal-kicker">ШАГ 01 / ЗАЯВКА</p><h2 id="dialogTitle">Давайте<br><em>знакомиться.</em></h2><p class="modal-lead">Вы выбрали группу:</p><div id="selectedCourse" class="selected-course"></div><div class="privacy-demo" role="note">Это интерактивное демо. Вводите только вымышленные данные: ничего не отправляется на сервер и не сохраняется.</div><form id="requestForm" novalidate><label>Как к вам обращаться?<input id="requestName" name="name" autocomplete="off" type="text" required minlength="2" maxlength="70" placeholder="Например, Тестовый ученик"><small class="field-error" id="nameError"></small></label><label>Как связаться? <span class="optional-label">(демо)</span><input id="requestContact" name="contact" autocomplete="off" type="text" required minlength="3" maxlength="100" placeholder="Например, @demo_user"><small class="field-error" id="contactError"></small></label><button class="btn btn-accent btn-wide" type="submit">Посмотреть результат <svg class="icon"><use href="#i-arrow"/></svg></button></form></div><div id="dialogSuccessScreen" class="dialog-success" hidden><div class="success-icon"><svg class="icon"><use href="#i-check"/></svg></div><p class="modal-kicker">ТЕСТ ЗАЯВКИ ПРОЙДЕН</p><h2>Всё работает<br><em>как задумано.</em></h2><p>Это только предпросмотр: заявка <strong>не отправлена</strong>, данные нигде не сохранены. При работе с заказчиком подключим защищённую отправку.</p><div class="success-summary" id="successSummary"></div><button type="button" id="successClose" class="btn btn-dark btn-wide">Вернуться к расписанию <svg class="icon"><use href="#i-arrow"/></svg></button></div></div></dialog>
+<script>
+/**
+ * DEMONSTRATION DATA ONLY. All organizations, dates, prices and group seat counts are fictional.
+ * Edit these records when adapting the template for a real school.
+ */
+window.DEMO_COURSES = [
+  {id:'en-a2-evening', language:'en', name:'Английский для общения', segment:'adult', level:'A2', format:'studio', time:'evening', days:'Пн, Ср', hour:'19:00', start:'02.11.2026', price:7900, duration:'80 мин · 2 раза в неделю', places:4, tag:'Популярный формат', description:'Разговорная практика, понятная грамматика и живые темы.', color:'mint'},
+  {id:'en-a0-online', language:'en', name:'Английский с нуля', segment:'adult', level:'A0', format:'online', time:'evening', days:'Вт, Чт', hour:'20:00', start:'03.11.2026', price:6900, duration:'75 мин · 2 раза в неделю', places:6, tag:'Для начинающих', description:'Спокойный старт: базовые фразы, произношение, первые диалоги.', color:'peach'},
+  {id:'en-b1-weekend', language:'en', name:'Speaking Club', segment:'adult', level:'B1', format:'online', time:'weekend', days:'Сб', hour:'12:00', start:'07.11.2026', price:4200, duration:'90 мин · 1 раз в неделю', places:2, tag:'Мест немного', description:'Практика общения без страха ошибиться.', color:'lavender'},
+  {id:'de-a1-evening', language:'de', name:'Немецкий: первый шаг', segment:'adult', level:'A1', format:'studio', time:'evening', days:'Вт, Пт', hour:'18:30', start:'10.11.2026', price:7600, duration:'80 мин · 2 раза в неделю', places:5, tag:'Новая группа', description:'Знакомимся с языком через ситуации из жизни.', color:'sky'},
+  {id:'es-a0-morning', language:'es', name:'Испанский с нуля', segment:'adult', level:'A0', format:'online', time:'morning', days:'Пн, Ср', hour:'10:00', start:'09.11.2026', price:7200, duration:'80 мин · 2 раза в неделю', places:5, tag:'Утреннее время', description:'Первые беседы, путешествия и полезные выражения.', color:'peach'},
+  {id:'en-b2-teen', language:'en', name:'Английский для подростков', segment:'teen', level:'B2', format:'studio', time:'day', days:'Вт, Чт', hour:'16:00', start:'03.11.2026', price:7900, duration:'80 мин · 2 раза в неделю', places:3, tag:'13–17 лет', description:'Дискуссии, проекты и уверенное использование языка.', color:'lavender'},
+  {id:'en-a2-teen', language:'en', name:'Английский после школы', segment:'teen', level:'A2', format:'online', time:'evening', days:'Пн, Ср', hour:'17:30', start:'02.11.2026', price:6500, duration:'70 мин · 2 раза в неделю', places:7, tag:'13–17 лет', description:'Поддержка школьной программы и активная разговорная практика.', color:'sky'},
+  {id:'en-a1-child', language:'en', name:'Английский через игру', segment:'child', level:'A1', format:'studio', time:'day', days:'Ср, Пт', hour:'15:30', start:'04.11.2026', price:6900, duration:'60 мин · 2 раза в неделю', places:4, tag:'7–10 лет', description:'Язык через движение, творчество и простые истории.', color:'mint'},
+  {id:'en-a0-child', language:'en', name:'Первый английский', segment:'child', level:'A0', format:'studio', time:'weekend', days:'Сб', hour:'11:00', start:'07.11.2026', price:3900, duration:'60 мин · 1 раз в неделю', places:0, tag:'Лист ожидания', description:'Игровое знакомство с новыми словами и звуками.', color:'peach'},
+  {id:'de-a2-teen', language:'de', name:'Немецкий для подростков', segment:'teen', level:'A2', format:'online', time:'weekend', days:'Вс', hour:'14:00', start:'08.11.2026', price:4100, duration:'85 мин · 1 раз в неделю', places:4, tag:'13–17 лет', description:'Практика языка в понятных подросткам темах.', color:'lavender'}
+];
+window.DEMO_DICTIONARY = {
+  language: {en:'Английский', de:'Немецкий', es:'Испанский'},
+  segment: {adult:'Взрослым', teen:'Подросткам', child:'Детям'},
+  format: {online:'Онлайн', studio:'В студии'}
+};
+
+</script>
+<script>
+(() => {
+  'use strict';
+
+  const courses = window.DEMO_COURSES || [];
+  const dict = window.DEMO_DICTIONARY || {};
+  const selectors = {
+    language: document.getElementById('filterLanguage'),
+    segment: document.getElementById('filterSegment'),
+    level: document.getElementById('filterLevel'),
+    format: document.getElementById('filterFormat'),
+    time: document.getElementById('filterTime')
+  };
+  const grid = document.getElementById('courseGrid');
+  const count = document.getElementById('resultCount');
+  const empty = document.getElementById('emptyState');
+  const dialog = document.getElementById('requestDialog');
+  const selected = document.getElementById('selectedCourse');
+  const form = document.getElementById('requestForm');
+  const formScreen = document.getElementById('dialogFormScreen');
+  const successScreen = document.getElementById('dialogSuccessScreen');
+  const successSummary = document.getElementById('successSummary');
+  let selectedGroup = null;
+
+  // Escaping makes it safe to replace demo content with externally prepared text.
+  const safe = value => String(value ?? '').replace(/[&<>"']/g, ch =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch]);
+  const money = value => new Intl.NumberFormat('ru-RU').format(value);
+
+  function card(course) {
+    const waiting = course.places === 0;
+    const placesText = waiting ? 'Набор завершён' : course.places < 4 ? `Осталось ${course.places} места` : `Есть места: ${course.places}`;
+    return `<article class="course-card" data-course="${safe(course.id)}">
+      <div class="course-card-top"><span class="course-language"><i class="language-bullet ${safe(course.language)}"></i>${safe(dict.language[course.language])}</span><span class="course-level">${safe(course.level)}</span></div>
+      <h3>${safe(course.name)}</h3><p class="course-description">${safe(course.description)}</p>
+      <div class="course-badges"><span class="course-tag">${safe(course.tag)}</span><span class="course-tag format">${safe(dict.format[course.format])}</span></div>
+      <div class="course-details">
+        <div class="course-detail"><span>Расписание</span><strong>${safe(course.days)} · ${safe(course.hour)}</strong></div>
+        <div class="course-detail"><span>Старт группы</span><strong>${safe(course.start)}</strong></div>
+        <div class="course-detail"><span>Продолжительность</span><strong>${safe(course.duration)}</strong></div>
+        <div class="course-detail"><span>Наличие мест*</span><strong>${safe(placesText)}</strong></div>
+      </div>
+      <div class="course-card-bottom"><div class="course-price">${money(course.price)} ₽ <small>/ мес.</small></div><button class="course-select" type="button" data-select="${safe(course.id)}">${waiting ? 'Лист ожидания' : 'Выбрать группу'} <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+    </article>`;
+  }
+
+  function render() {
+    const values = Object.fromEntries(Object.entries(selectors).map(([key, el]) => [key, el.value]));
+    const result = courses.filter(course => Object.entries(values).every(([key, value]) => value === 'all' || course[key] === value));
+    grid.innerHTML = result.map(card).join('');
+    count.textContent = `Найдено групп: ${result.length}`;
+    empty.hidden = result.length !== 0;
+    grid.hidden = result.length === 0;
+  }
+
+  function resetFilters() {
+    Object.values(selectors).forEach(select => { select.value = 'all'; });
+    render();
+  }
+
+  Object.values(selectors).forEach(select => select.addEventListener('change', render));
+  document.getElementById('resetFilters').addEventListener('click', resetFilters);
+  document.getElementById('emptyReset').addEventListener('click', resetFilters);
+
+  document.querySelectorAll('[data-segment]').forEach(button => {
+    button.addEventListener('click', () => {
+      resetFilters();
+      selectors.segment.value = button.dataset.segment;
+      render();
+      document.getElementById('schedule').scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+    });
+  });
+
+  function openDialog(group) {
+    selectedGroup = group;
+    form.reset();
+    clearErrors();
+    formScreen.hidden = false;
+    successScreen.hidden = true;
+    const waiting = group.places === 0;
+    selected.innerHTML = `<strong>${safe(group.name)} · ${safe(group.level)}</strong><span>${safe(dict.format[group.format])} · ${safe(group.days)}, ${safe(group.hour)} · ${money(group.price)} ₽/мес.</span>${waiting ? '<br><span>Группа заполнена: это пример заявки в лист ожидания.</span>' : ''}`;
+    dialog.showModal();
+    document.body.classList.add('dialog-open');
+    // Focus a predictable control for keyboard users.
+    setTimeout(() => document.getElementById('requestName').focus(), 10);
+  }
+
+  grid.addEventListener('click', event => {
+    const button = event.target.closest('[data-select]');
+    if (!button) return;
+    const group = courses.find(item => item.id === button.dataset.select);
+    if (group) openDialog(group);
+  });
+
+  function clearErrors() {
+    ['requestName', 'requestContact'].forEach(id => {
+      const input = document.getElementById(id);
+      input.removeAttribute('aria-invalid');
+      document.getElementById(id === 'requestName' ? 'nameError' : 'contactError').textContent = '';
+    });
+  }
+
+  function error(inputId, errorId, message) {
+    const input = document.getElementById(inputId);
+    input.setAttribute('aria-invalid', 'true');
+    document.getElementById(errorId).textContent = message;
+    return input;
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault(); // NO network request, database, cookies or localStorage.
+    clearErrors();
+    const name = document.getElementById('requestName').value.trim();
+    const contact = document.getElementById('requestContact').value.trim();
+    let firstError = null;
+    if (name.length < 2) firstError = error('requestName', 'nameError', 'Укажите не менее двух символов.');
+    if (contact.length < 3) {
+      const contactError = error('requestContact', 'contactError', 'Укажите пример контакта, минимум три символа.');
+      if (!firstError) firstError = contactError;
+    }
+    if (firstError) { firstError.focus(); return; }
+    const isWaitlist = selectedGroup.places === 0;
+    successSummary.textContent = `${name} · ${isWaitlist ? 'Лист ожидания' : 'Группа'} «${selectedGroup.name}» · ${selectedGroup.days}, ${selectedGroup.hour}. Ничего не отправлено.`;
+    formScreen.hidden = true;
+    successScreen.hidden = false;
+    // Remove any entered personal content as soon as preview is shown.
+    form.reset();
+    document.getElementById('successClose').focus();
+  });
+
+  function closeDialog() {
+    if (dialog.open) dialog.close();
+    form.reset();
+    successSummary.textContent = '';
+    selectedGroup = null;
+  }
+  document.getElementById('closeDialog').addEventListener('click', closeDialog);
+  document.getElementById('successClose').addEventListener('click', closeDialog);
+  dialog.addEventListener('close', () => { document.body.classList.remove('dialog-open'); form.reset(); });
+  dialog.addEventListener('click', event => { if (event.target === dialog) closeDialog(); });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+    mainNav.classList.toggle('open', !expanded);
+  });
+  mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  render();
+})();
+
+</script>
+</body>
+</html>
