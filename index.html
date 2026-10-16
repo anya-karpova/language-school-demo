@@ -189,7 +189,7 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
       <div class="container">
         <div class="schedule-top">
           <div><p class="section-kicker light">02 / РАСПИСАНИЕ</p><h2 id="scheduleTitle">Ваша группа<br>уже где-то <em>здесь.</em></h2></div>
-          <p class="schedule-aside">Найдите удобные занятия за несколько секунд. Даты, места и стоимость в этой демоверсии — примеры.</p>
+          <p class="schedule-aside">Найдите удобные занятия за несколько секунд. Расписание загружается из Cloudflare D1. Сейчас в базе только тестовые группы.</p>
         </div>
         <div class="filter-panel" aria-label="Поиск подходящей группы">
           <div class="filter-panel-head"><span><svg class="icon"><use href="#i-sliders"/></svg> Подобрать занятия</span><button class="reset-btn" id="resetFilters" type="button">Сбросить фильтры ↗︎</button></div>
@@ -200,7 +200,7 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
             <label class="filter"><span>Формат</span><select id="filterFormat"><option value="all">Неважно</option><option value="online">Онлайн</option><option value="studio">В студии</option></select></label>
             <label class="filter"><span>Когда удобно</span><select id="filterTime"><option value="all">Любое время</option><option value="morning">Утром</option><option value="day">Днём</option><option value="evening">Вечером</option><option value="weekend">В выходные</option></select></label>
           </div>
-          <div class="filters-footer"><div><span class="result-dot"></span><span id="resultCount" role="status" aria-live="polite">Подбираем группы…</span></div><span class="sample-note">* Демонстрационные данные</span></div>
+          <div class="filters-footer"><div><span class="result-dot"></span><span id="resultCount" role="status" aria-live="polite">Подбираем группы…</span></div><span class="sample-note">* Тестовые данные из облачной базы</span></div>
         </div>
         <div class="course-grid" id="courseGrid" aria-live="off"></div>
         <div class="empty-state" id="emptyState" hidden><div class="empty-illustration">∅</div><h3>Пока нет точного совпадения</h3><p>Попробуйте изменить уровень, формат или удобное время. В реальном проекте здесь можно предложить лист ожидания.</p><button type="button" class="btn btn-accent" id="emptyReset">Показать все группы <svg class="icon"><use href="#i-arrow"/></svg></button></div>
@@ -222,21 +222,9 @@ svg.svg-sprite{position:absolute;width:0;height:0;overflow:hidden}
   <dialog id="requestDialog" class="request-dialog" aria-labelledby="dialogTitle"><div class="dialog-shell"><button type="button" class="dialog-close" id="closeDialog" aria-label="Закрыть окно"><svg class="icon"><use href="#i-close"/></svg></button><div id="dialogFormScreen"><p class="modal-kicker">ШАГ 01 / ЗАЯВКА</p><h2 id="dialogTitle">Давайте<br><em>знакомиться.</em></h2><p class="modal-lead">Вы выбрали группу:</p><div id="selectedCourse" class="selected-course"></div><div class="privacy-demo" role="note">Это интерактивное демо. Вводите только вымышленные данные: ничего не отправляется на сервер и не сохраняется.</div><form id="requestForm" novalidate><label>Как к вам обращаться?<input id="requestName" name="name" autocomplete="off" type="text" required minlength="2" maxlength="70" placeholder="Например, Тестовый ученик"><small class="field-error" id="nameError"></small></label><label>Как связаться? <span class="optional-label">(демо)</span><input id="requestContact" name="contact" autocomplete="off" type="text" required minlength="3" maxlength="100" placeholder="Например, @demo_user"><small class="field-error" id="contactError"></small></label><button class="btn btn-accent btn-wide" type="submit">Посмотреть результат <svg class="icon"><use href="#i-arrow"/></svg></button></form></div><div id="dialogSuccessScreen" class="dialog-success" hidden><div class="success-icon"><svg class="icon"><use href="#i-check"/></svg></div><p class="modal-kicker">ТЕСТ ЗАЯВКИ ПРОЙДЕН</p><h2>Всё работает<br><em>как задумано.</em></h2><p>Это только предпросмотр: заявка <strong>не отправлена</strong>, данные нигде не сохранены. При работе с заказчиком подключим защищённую отправку.</p><div class="success-summary" id="successSummary"></div><button type="button" id="successClose" class="btn btn-dark btn-wide">Вернуться к расписанию <svg class="icon"><use href="#i-arrow"/></svg></button></div></div></dialog>
 <script>
 /**
- * DEMONSTRATION DATA ONLY. All organizations, dates, prices and group seat counts are fictional.
- * Edit these records when adapting the template for a real school.
+ * Public course data is loaded from LINIA School API / Cloudflare D1.
+ * All records currently stored in D1 are DEMONSTRATION data.
  */
-window.DEMO_COURSES = [
-  {id:'en-a2-evening', language:'en', name:'Английский для общения', segment:'adult', level:'A2', format:'studio', time:'evening', days:'Пн, Ср', hour:'19:00', start:'02.11.2026', price:7900, duration:'80 мин · 2 раза в неделю', places:4, tag:'Популярный формат', description:'Разговорная практика, понятная грамматика и живые темы.', color:'mint'},
-  {id:'en-a0-online', language:'en', name:'Английский с нуля', segment:'adult', level:'A0', format:'online', time:'evening', days:'Вт, Чт', hour:'20:00', start:'03.11.2026', price:6900, duration:'75 мин · 2 раза в неделю', places:6, tag:'Для начинающих', description:'Спокойный старт: базовые фразы, произношение, первые диалоги.', color:'peach'},
-  {id:'en-b1-weekend', language:'en', name:'Speaking Club', segment:'adult', level:'B1', format:'online', time:'weekend', days:'Сб', hour:'12:00', start:'07.11.2026', price:4200, duration:'90 мин · 1 раз в неделю', places:2, tag:'Мест немного', description:'Практика общения без страха ошибиться.', color:'lavender'},
-  {id:'de-a1-evening', language:'de', name:'Немецкий: первый шаг', segment:'adult', level:'A1', format:'studio', time:'evening', days:'Вт, Пт', hour:'18:30', start:'10.11.2026', price:7600, duration:'80 мин · 2 раза в неделю', places:5, tag:'Новая группа', description:'Знакомимся с языком через ситуации из жизни.', color:'sky'},
-  {id:'es-a0-morning', language:'es', name:'Испанский с нуля', segment:'adult', level:'A0', format:'online', time:'morning', days:'Пн, Ср', hour:'10:00', start:'09.11.2026', price:7200, duration:'80 мин · 2 раза в неделю', places:5, tag:'Утреннее время', description:'Первые беседы, путешествия и полезные выражения.', color:'peach'},
-  {id:'en-b2-teen', language:'en', name:'Английский для подростков', segment:'teen', level:'B2', format:'studio', time:'day', days:'Вт, Чт', hour:'16:00', start:'03.11.2026', price:7900, duration:'80 мин · 2 раза в неделю', places:3, tag:'13–17 лет', description:'Дискуссии, проекты и уверенное использование языка.', color:'lavender'},
-  {id:'en-a2-teen', language:'en', name:'Английский после школы', segment:'teen', level:'A2', format:'online', time:'evening', days:'Пн, Ср', hour:'17:30', start:'02.11.2026', price:6500, duration:'70 мин · 2 раза в неделю', places:7, tag:'13–17 лет', description:'Поддержка школьной программы и активная разговорная практика.', color:'sky'},
-  {id:'en-a1-child', language:'en', name:'Английский через игру', segment:'child', level:'A1', format:'studio', time:'day', days:'Ср, Пт', hour:'15:30', start:'04.11.2026', price:6900, duration:'60 мин · 2 раза в неделю', places:4, tag:'7–10 лет', description:'Язык через движение, творчество и простые истории.', color:'mint'},
-  {id:'en-a0-child', language:'en', name:'Первый английский', segment:'child', level:'A0', format:'studio', time:'weekend', days:'Сб', hour:'11:00', start:'07.11.2026', price:3900, duration:'60 мин · 1 раз в неделю', places:0, tag:'Лист ожидания', description:'Игровое знакомство с новыми словами и звуками.', color:'peach'},
-  {id:'de-a2-teen', language:'de', name:'Немецкий для подростков', segment:'teen', level:'A2', format:'online', time:'weekend', days:'Вс', hour:'14:00', start:'08.11.2026', price:4100, duration:'85 мин · 1 раз в неделю', places:4, tag:'13–17 лет', description:'Практика языка в понятных подросткам темах.', color:'lavender'}
-];
 window.DEMO_DICTIONARY = {
   language: {en:'Английский', de:'Немецкий', es:'Испанский'},
   segment: {adult:'Взрослым', teen:'Подросткам', child:'Детям'},
@@ -248,7 +236,10 @@ window.DEMO_DICTIONARY = {
 (() => {
   'use strict';
 
-  const courses = window.DEMO_COURSES || [];
+  const API_URL = 'https://linia-school-api.anyaa-karpoova-20007.workers.dev/api/groups';
+  let courses = [];
+  let loading = true;
+  let loadError = null;
   const dict = window.DEMO_DICTIONARY || {};
   const selectors = {
     language: document.getElementById('filterLanguage'),
@@ -268,6 +259,66 @@ window.DEMO_DICTIONARY = {
   const successSummary = document.getElementById('successSummary');
   let selectedGroup = null;
 
+  const emptyHeading = empty.querySelector('h3');
+  const emptyText = empty.querySelector('p');
+  const emptyAction = document.getElementById('emptyReset');
+
+  // Convert rows from the D1 schema into the existing UI model.
+  function normalizeGroup(row) {
+    const startTime = typeof row.start_time === 'string' ? row.start_time : '';
+    const days = typeof row.days === 'string' ? row.days : '';
+    const hours = Number.parseInt(startTime.split(':')[0], 10);
+    const weekend = /(?:^|[^А-Яа-я])(Сб|Вс)(?:[^А-Яа-я]|$)/u.test(days);
+    const time = weekend ? 'weekend' : hours < 12 ? 'morning' : hours < 17 ? 'day' : 'evening';
+    const dateString = String(row.start_date || '');
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString);
+    const startDate = match ? `${match[3]}.${match[2]}.${match[1]}` : 'Уточняется';
+    const price = Number(row.price);
+    const places = Number(row.places);
+    return {
+      id: String(row.id),
+      name: String(row.name),
+      language: String(row.language),
+      segment: String(row.audience),
+      level: String(row.level),
+      format: String(row.format),
+      days,
+      hour: startTime || 'Уточняется',
+      start: startDate,
+      price: Number.isFinite(price) && price >= 0 ? price : 0,
+      places: Number.isInteger(places) && places >= 0 ? places : 0,
+      time,
+      description: String(row.description || 'Подробности программы уточняются.'),
+      // Duration and tags aren't in the current D1 schema. Don't invent them.
+      duration: '',
+      tag: ''
+    };
+  }
+
+  async function loadGroups() {
+    loading = true;
+    loadError = null;
+    render();
+    try {
+      const response = await fetch(API_URL, {cache: 'no-store'});
+      if (!response.ok) throw new Error(`API returned ${response.status}`);
+      const payload = await response.json();
+      if (payload.success !== true || !Array.isArray(payload.groups)) {
+        throw new Error('Unexpected API response');
+      }
+      courses = payload.groups
+        .filter(row => row && row.id != null && row.name != null)
+        .map(normalizeGroup);
+    } catch (error) {
+      console.error('Failed to load LINIA School schedule', error);
+      courses = [];
+      loadError = 'Не удалось получить расписание. Проверьте подключение и попробуйте ещё раз.';
+    } finally {
+      loading = false;
+      render();
+    }
+  }
+
   // Escaping makes it safe to replace demo content with externally prepared text.
   const safe = value => String(value ?? '').replace(/[&<>"']/g, ch =>
     ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch]);
@@ -279,24 +330,44 @@ window.DEMO_DICTIONARY = {
     return `<article class="course-card" data-course="${safe(course.id)}">
       <div class="course-card-top"><span class="course-language"><i class="language-bullet ${safe(course.language)}"></i>${safe(dict.language[course.language])}</span><span class="course-level">${safe(course.level)}</span></div>
       <h3>${safe(course.name)}</h3><p class="course-description">${safe(course.description)}</p>
-      <div class="course-badges"><span class="course-tag">${safe(course.tag)}</span><span class="course-tag format">${safe(dict.format[course.format])}</span></div>
+      <div class="course-badges">${course.tag ? `<span class="course-tag">${safe(course.tag)}</span>` : ''}<span class="course-tag format">${safe(dict.format[course.format] || course.format)}</span></div>
       <div class="course-details">
         <div class="course-detail"><span>Расписание</span><strong>${safe(course.days)} · ${safe(course.hour)}</strong></div>
         <div class="course-detail"><span>Старт группы</span><strong>${safe(course.start)}</strong></div>
-        <div class="course-detail"><span>Продолжительность</span><strong>${safe(course.duration)}</strong></div>
+        ${course.duration ? `<div class="course-detail"><span>Продолжительность</span><strong>${safe(course.duration)}</strong></div>` : ''}
         <div class="course-detail"><span>Наличие мест*</span><strong>${safe(placesText)}</strong></div>
       </div>
-      <div class="course-card-bottom"><div class="course-price">${money(course.price)} ₽ <small>/ мес.</small></div><button class="course-select" type="button" data-select="${safe(course.id)}">${waiting ? 'Лист ожидания' : 'Выбрать группу'} <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+      <div class="course-card-bottom"><div class="course-price">${course.price > 0 ? `${money(course.price)} ₽ <small>/ мес.</small>` : 'Цена уточняется'}</div><button class="course-select" type="button" data-select="${safe(course.id)}">${waiting ? 'Лист ожидания' : 'Выбрать группу'} <svg class="icon"><use href="#i-arrow"/></svg></button></div>
     </article>`;
   }
 
   function render() {
+    if (loading) {
+      count.textContent = 'Загружаем расписание из базы…';
+      empty.hidden = true;
+      grid.hidden = true;
+      return;
+    }
+    if (loadError || courses.length === 0) {
+      grid.hidden = true;
+      empty.hidden = false;
+      emptyHeading.textContent = loadError ? 'Не удалось загрузить группы' : 'Расписание пока пустое';
+      emptyText.textContent = loadError || 'В базе ещё нет опубликованных учебных групп.';
+      emptyAction.textContent = 'Повторить загрузку';
+      count.textContent = loadError ? 'Не удалось загрузить расписание' : 'Найдено групп: 0';
+      return;
+    }
     const values = Object.fromEntries(Object.entries(selectors).map(([key, el]) => [key, el.value]));
     const result = courses.filter(course => Object.entries(values).every(([key, value]) => value === 'all' || course[key] === value));
     grid.innerHTML = result.map(card).join('');
     count.textContent = `Найдено групп: ${result.length}`;
     empty.hidden = result.length !== 0;
     grid.hidden = result.length === 0;
+    if (result.length === 0) {
+      emptyHeading.textContent = 'Не нашли подходящую группу';
+      emptyText.textContent = 'Попробуйте изменить уровень, формат или удобное время.';
+      emptyAction.textContent = 'Сбросить фильтры';
+    }
   }
 
   function resetFilters() {
@@ -306,7 +377,10 @@ window.DEMO_DICTIONARY = {
 
   Object.values(selectors).forEach(select => select.addEventListener('change', render));
   document.getElementById('resetFilters').addEventListener('click', resetFilters);
-  document.getElementById('emptyReset').addEventListener('click', resetFilters);
+  emptyAction.addEventListener('click', () => {
+    if (loadError || courses.length === 0) loadGroups();
+    else resetFilters();
+  });
 
   document.querySelectorAll('[data-segment]').forEach(button => {
     button.addEventListener('click', () => {
@@ -324,7 +398,7 @@ window.DEMO_DICTIONARY = {
     formScreen.hidden = false;
     successScreen.hidden = true;
     const waiting = group.places === 0;
-    selected.innerHTML = `<strong>${safe(group.name)} · ${safe(group.level)}</strong><span>${safe(dict.format[group.format])} · ${safe(group.days)}, ${safe(group.hour)} · ${money(group.price)} ₽/мес.</span>${waiting ? '<br><span>Группа заполнена: это пример заявки в лист ожидания.</span>' : ''}`;
+    selected.innerHTML = `<strong>${safe(group.name)} · ${safe(group.level)}</strong><span>${safe(dict.format[group.format])} · ${safe(group.days)}, ${safe(group.hour)} · ${group.price > 0 ? `${money(group.price)} ₽/мес.` : 'Цена уточняется'}</span>${waiting ? '<br><span>Группа заполнена: это пример заявки в лист ожидания.</span>' : ''}`;
     dialog.showModal();
     document.body.classList.add('dialog-open');
     // Focus a predictable control for keyboard users.
@@ -397,7 +471,7 @@ window.DEMO_DICTIONARY = {
     menuToggle.setAttribute('aria-expanded', 'false');
   }));
 
-  render();
+  loadGroups();
 })();
 
 </script>
